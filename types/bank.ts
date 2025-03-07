@@ -1,5 +1,4 @@
 export interface Bank {
-    name: string;
-    interestRate: number;
-    maxLoan: number;
+    id: number;
+    bankName: string;
 }
