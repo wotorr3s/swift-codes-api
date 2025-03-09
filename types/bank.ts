@@ -1,4 +1,5 @@
 export interface Bank {
     id: number;
-    bankName: string;
+    name: string;
+    swiftCode: string;
 }

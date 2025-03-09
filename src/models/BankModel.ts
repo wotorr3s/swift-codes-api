@@ -11,8 +11,8 @@ class BankModel
         InferCreationAttributes<BankModel>
     >
     implements Bank {
-        declare id: number;
-        declare bankName: string;
+        declare name: string;
+        declare swiftCode: string;
 }
 
 BankModel.init(
@@ -22,8 +22,12 @@ BankModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        bankName: {
+        name: {
             type: DataTypes.STRING,
+        },
+        swiftCode: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
@@ -31,7 +35,7 @@ BankModel.init(
     },
     {
         sequelize: sequelizeInstance,
-        tableName: "departments",
+        tableName: "banks",
         paranoid: true,
     }
     

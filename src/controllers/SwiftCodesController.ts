@@ -13,5 +13,32 @@ router.get('/' , async (req, res) => {
     res.status(StatusCodes.OK).send(departments);
 });
 
+router.get('/:swiftCode', async (req, res) => {
+    const swiftCode = req.params.swiftCode;
+    console.log(swiftCode)
+    if(swiftCode.endsWith('XXX')){
+        const bank = await BankModel.findOne({
+            where: {
+                swiftCode: swiftCode
+            },
+            include:{
+                model: DepartmentModel,
+                as: 'branches'
+            }
+        });
+        res.status(StatusCodes.OK).send(bank);
+    }
+    else{
+        const department = await DepartmentModel.findOne({
+            where: {
+                swiftCode: swiftCode
+            }
+        });
+        console.log(department)
+        res.status(StatusCodes.OK).send(department);
+    }
+    
+});
+
 
 export default router;

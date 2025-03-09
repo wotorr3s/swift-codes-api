@@ -12,7 +12,6 @@ class DepartmentModel
         InferCreationAttributes<DepartmentModel>
     >
     implements Department {
-        declare id: number;
         declare name: string;
         declare bankId: number;
         declare swiftCode: string;
@@ -84,7 +83,7 @@ DepartmentModel.belongsTo(BankModel, {
 });
 BankModel.hasMany(DepartmentModel, {
     foreignKey: "bankId",
-    as: "departments",
+    as: "branches",
 });
 
 
