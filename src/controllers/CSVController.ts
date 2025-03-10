@@ -40,16 +40,16 @@ async function saveToDBHeadquerters(){
     let headquerters = csvRow.filter((row:any)=> row.swiftCode.endsWith('XXX'));
     for (const headquerter of headquerters) {
         const bank = await BankModel.create({
-            name: headquerter.name,
+            bankName: headquerter.name,
             swiftCode: headquerter.swiftCode,
         });
         try{
             await DepartmentModel.create({
-                name: headquerter.name,
+                bankName: headquerter.name,
                 swiftCode: headquerter.swiftCode,
                 address: headquerter.address,
                 town: headquerter.town,
-                country: headquerter.country,
+                countryName: headquerter.country,
                 countryISO2: headquerter.countryISO2,
                 isHeadquerter: true,
                 timezone: headquerter.timezone,
@@ -74,11 +74,11 @@ async function saveToDBBranches(){
         if (bank) {
             try{
                 await DepartmentModel.create({
-                    name: branch.name,
+                    bankName: branch.name,
                     swiftCode: branch.swiftCode,
                     address: branch.address,
                     town: branch.town,
-                    country: branch.country,
+                    countryName: branch.country,
                     countryISO2: branch.countryISO2,
                     isHeadquerter: false,
                     timezone: branch.timezone,
@@ -91,11 +91,11 @@ async function saveToDBBranches(){
         else{
             try{
                 await DepartmentModel.create({
-                    name: branch.name,
+                    bankName: branch.name,
                     swiftCode: branch.swiftCode,
                     address: branch.address,
                     town: branch.town,
-                    country: branch.country,
+                    countryName: branch.country,
                     countryISO2: branch.countryISO2,
                     isHeadquerter: false,
                     timezone: branch.timezone,

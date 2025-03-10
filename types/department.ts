@@ -1,11 +1,11 @@
 export interface Department{
     id: number;
-    name: string;
+    bankName: string;
     bankId: number;
     swiftCode: string;
     address: string;
     town: string;
-    country: string;
+    countryName: string;
     countryISO2: string;
     isHeadquerter: boolean;
     timezone: string;

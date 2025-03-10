@@ -1,5 +1,5 @@
 import { DataTypes, InferAttributes, InferCreationAttributes } from "sequelize";
-import { Bank } from "../../types";
+import { Bank, Department } from "../../types";
 import {
     BaseParanoidModel,
     sequelizeInstance,
@@ -11,8 +11,9 @@ class BankModel
         InferCreationAttributes<BankModel>
     >
     implements Bank {
-        declare name: string;
+        declare bankName: string;
         declare swiftCode: string;
+        declare branches?: Department[];
 }
 
 BankModel.init(
@@ -22,7 +23,7 @@ BankModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
+        bankName: {
             type: DataTypes.STRING,
         },
         swiftCode: {

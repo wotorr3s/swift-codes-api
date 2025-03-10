@@ -12,12 +12,12 @@ class DepartmentModel
         InferCreationAttributes<DepartmentModel>
     >
     implements Department {
-        declare name: string;
+        declare bankName: string;
         declare bankId: number;
         declare swiftCode: string;
         declare address: string;
         declare town: string;
-        declare country: string;
+        declare countryName: string;
         declare countryISO2: string;
         declare isHeadquerter: boolean;
         declare timezone: string;
@@ -34,7 +34,7 @@ DepartmentModel.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        name: {
+        bankName: {
             type: DataTypes.STRING,
         },
         swiftCode: {
@@ -49,7 +49,7 @@ DepartmentModel.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        country: {
+        countryName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
