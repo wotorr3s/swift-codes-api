@@ -33,6 +33,10 @@ router.get('/:swiftCode', async (req, res) => {
                 attributes: ['address', 'bankName', 'countryISO2', 'isHeadquerter', 'swiftCode'],
             }
         });
+        if(!department){
+            res.status(StatusCodes.NOT_FOUND).send({ message: 'Swift code not found' });
+            return;
+        }
 
         res.status(StatusCodes.OK).send({address: department?.address, bankName: department?.bankName, countryISO2: department?.countryISO2, countryName: department?.countryName, isHeadquerter: department?.isHeadquerter, swiftCode: department?.swiftCode, branches: bank?.branches});
     }
@@ -43,7 +47,10 @@ router.get('/:swiftCode', async (req, res) => {
             },
             attributes: ['address', 'bankName', 'countryISO2', 'countryName', 'isHeadquerter', 'swiftCode'],
         });
-        console.log(department)
+        if(!department){
+            res.status(StatusCodes.NOT_FOUND).send({ message: 'Swift code not found' });
+            return;
+        }
         res.status(StatusCodes.OK).send(department);
     }
     
@@ -57,8 +64,8 @@ router.get('/country/:countryISO2', async (req, res) => {
         },
         attributes: ['countryName'],
     });
-    if(!country){
-        res.status(StatusCodes.NOT_FOUND).send({message: 'Country not found'});
+    if (!country) {
+        res.status(StatusCodes.NOT_FOUND).send({ message: 'Country not found' });
         return;
     }
     const departments = await DepartmentModel.findAll({
@@ -67,10 +74,11 @@ router.get('/country/:countryISO2', async (req, res) => {
         },
         attributes: ['address', 'bankName', 'countryISO2', 'isHeadquerter', 'swiftCode'],
     });
-    if(departments.length === 0){
-        res.status(StatusCodes.NOT_FOUND).send({message: 'No swift codes found for this country'});
+    if (departments.length === 0) {
+        res.status(StatusCodes.NOT_FOUND).send({ message: 'No swift codes found for this country' });
+        return;
     }
-    res.status(StatusCodes.OK).send({countryISO2: countryISO2, countryName: country?.countryName, swiftCodes: departments});
+    res.status(StatusCodes.OK).send({ countryISO2: countryISO2, countryName: country?.countryName, swiftCodes: departments });
 });
 
 router.post('/', async (req, res) => {
