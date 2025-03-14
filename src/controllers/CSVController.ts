@@ -108,5 +108,4 @@ async function saveToDBBranches(){
     }
 }
 
-
-export default router;
+export {router, readFromCSV, saveToDBHeadquerters, saveToDBBranches};

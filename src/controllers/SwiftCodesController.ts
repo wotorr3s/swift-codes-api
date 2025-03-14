@@ -9,13 +9,11 @@ const router = express.Router();
 
 router.get('/' , async (req, res) => {
     const departments = await DepartmentModel.findAll();
-    console.log(departments)
     res.status(StatusCodes.OK).send(departments);
 });
 
 router.get('/:swiftCode', async (req, res) => {
     const swiftCode = req.params.swiftCode;
-    console.log(swiftCode)
     if(swiftCode.endsWith('XXX')){
         const department = await DepartmentModel.findOne({
             where: {
@@ -83,7 +81,6 @@ router.get('/country/:countryISO2', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { bankName, swiftCode, address, countryName, countryISO2, isHeadquarter } = req.body;
-    console.log(bankName, swiftCode, address, countryName, countryISO2, isHeadquarter);
     if (!bankName || !swiftCode || !address || !countryName || !countryISO2 || isHeadquarter === undefined) {
         res.status(StatusCodes.BAD_REQUEST).send({ message: 'Missing required fields' });
         return;
