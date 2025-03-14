@@ -109,3 +109,4 @@ async function saveToDBBranches(){
 }
 
 export {router, readFromCSV, saveToDBHeadquerters, saveToDBBranches};
+export default router;
